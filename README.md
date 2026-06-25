@@ -1,11 +1,9 @@
 
 # KeyOverlay
- A simple key overlay for osu! streaming
+ A simple key overlay.
  
 Edit `config.ini` to set your keymap
-# [Download Link](https://github.com/glacc/KeyOverlay/releases)
-IF YOU ARE HAVING PROBLEMS WITH THE PROGRAM WHEN OSU! IS ON FULLSCREEN, TRY USING GAME CAPTURE INSTEAD OF WINDOW CAPTURE IN OBS!
-
+# [Download Link](https://github.com/developer-incoming/KeyOverlay/releases)
 
 # config.ini properties
 ### General
@@ -27,6 +25,10 @@ outlineThickness - Changes the thickness of a square border.
 fading - yes/no - Adds/removes the fading effect on top.
 
 counter - yes/no - Adds a keycounter beneath each key that counts total clicks in a session.
+
+globalCounter - yes/no - Adds a global keycounter beneath that counts total clicks in all sessions.
+
+showStatsText - yes/no - Shows KPS, session and global total key presses.
 
 fps - Sets the target FPS for the program to run.
 

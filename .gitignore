@@ -387,3 +387,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Error Messages (Program.cs: line 18)
+ErrorMessage.txt
+
+# Global Counter Save (GlobalCounter.cs)
+global_counts.dat

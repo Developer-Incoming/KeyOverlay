@@ -8,6 +8,7 @@ namespace KeyOverlay
         private static void Main(string[] args)
         {
             AppWindow window;
+            
             try
             {
                 window = new AppWindow();
@@ -15,10 +16,11 @@ namespace KeyOverlay
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                using var sw = new StreamWriter("errorMessage.txt");
+                using var sw = new StreamWriter("ErrorMessage.txt");
                 sw.WriteLine(e.Message);
                 throw;
             }
+
             window.Run();
         }
     }

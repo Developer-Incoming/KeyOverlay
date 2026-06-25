@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,6 +57,18 @@ namespace KeyOverlay
                 text.Position = new Vector2f(square.GetGlobalBounds().Left + square.OutlineThickness + square.Size.X / 2f,
                     square.GetGlobalBounds().Top + square.OutlineThickness + square.Size.Y / 2f);
 
+            return text;
+        }
+
+        public static Text CreateStatsText(string content, float xPosition, float yPosition, Color color, uint charSize = 18, bool centerX = false)
+        {
+            var text = new Text(content, _font);
+            text.CharacterSize = charSize;
+            text.Style = Text.Styles.Bold;
+            text.FillColor = color;
+            if (centerX)
+                text.Origin = new Vector2f(text.GetLocalBounds().Width / 2f, 0);
+            text.Position = new Vector2f(xPosition, yPosition);
             return text;
         }
 
