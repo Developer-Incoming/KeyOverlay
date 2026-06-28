@@ -42,3 +42,27 @@ jobs:
       with:
         name: KeyOverlay-${{ matrix.os }}
         path: build
+    
+    - name: Publish
+      run: dotnet publish --configuration Release -o publish-output
+
+    - name: Windows Publish
+      if: matrix.os == 'windows-latest'
+      run: Compress-Archive -Path publish-output\* -DestinationPath KeyOverlay-${{ matrix.os }}.zip
+
+    - name: Linux/macOS Publish
+      if: matrix.os != 'windows-latest'
+      run: |
+        cd publish-output
+        zip -r ../KeyOverlay-${{ matrix.os }}.zip .
+    
+    - name: Publish
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "*.zip"
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: "v1.1.${{ github.run_number }}"
+        name: "Release v1.1.${{ github.run_number }}"
+        body: "Automated build for commit ${{ github.sha }}."
+        allowUpdates: true
