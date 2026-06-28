@@ -30,6 +30,8 @@ globalCounter - yes/no - Adds a global keycounter beneath that counts total clic
 
 showStatsText - yes/no - Shows KPS, session and global total key presses.
 
+showBarTime - yes/no - Shows each bar hold time in ms.
+
 fps - Sets the target FPS for the program to run.
 
 ### Keys
