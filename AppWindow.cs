@@ -34,6 +34,7 @@ namespace KeyOverlay
         private bool _counter;
         private bool _globalCounter;
         private bool _showStatsText;
+        private bool _showBarTime;
         private List<Drawable> _staticDrawables;
         private uint _maxFPS;
         private Clock _clock = new();
@@ -150,6 +151,7 @@ namespace KeyOverlay
                 _counter = general.ContainsKey("counter") && general["counter"] == "yes";
                 _globalCounter = general.ContainsKey("globalCounter") && general["globalCounter"] == "yes";
                 _showStatsText = general.ContainsKey("showStatsText") && general["showStatsText"] == "yes";
+                _showBarTime = general.ContainsKey("showBarTime") && general["showBarTime"] == "yes";
 
                 _fadingTexture = new FadingTexture(_backgroundColor, _size.X, _ratioY);
             }
@@ -338,7 +340,27 @@ namespace KeyOverlay
                     _window.Draw(globalText);
                 }
 
-                foreach (var bar in key.BarList) _window.Draw(bar);
+                foreach (var bar in key.BarList)
+                {
+                    _window.Draw(bar);
+
+                    if (_showStatsText)
+                    {
+                        float holdMs = (bar.Size.Y / _barSpeed) * 1000f;
+                        string holdLabel = $"{holdMs:F0}ms";
+                        var holdText = new Text(holdLabel, CreateItems._font);
+                        holdText.CharacterSize = 14;
+                        holdText.Style = Text.Styles.Bold;
+                        holdText.FillColor = new Color(255, 255, 255, 180);
+                        var bounds = holdText.GetLocalBounds();
+                        holdText.Origin = new Vector2f(bounds.Width / 2f, bounds.Height / 2f);
+                        holdText.Position = new Vector2f(
+                            bar.Position.X + bar.Size.X / 2f,
+                            bar.Position.Y + bar.Size.Y - 14
+                        );
+                        _window.Draw(holdText);
+                    }
+                }
             }
 
             // Draw stats bar at the bottom
